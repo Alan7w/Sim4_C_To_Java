@@ -1,4 +1,3 @@
-
 public class InstructionFields {
 	int opcode; 
 	int rs;
