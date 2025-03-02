@@ -21,7 +21,19 @@ public class test_milestone1_02_executeControl1 {
                         (inst >> 16) & 0xFFFF, inst & 0xFFFF);
 
                 Sim4_test_commonCode.dumpFields(fields);
-                Sim4_test_commonCode.dumpControl(0, 0, control);
+
+                System.out.println("  --");
+                System.out.printf("  ALUsrc     =%d\n", control.ALUsrc);
+                System.out.printf("  ALU.op     =%d\n", control.ALU.op);
+                System.out.printf("  ALU.bNegate=%d\n", control.ALU.bNegate);
+                System.out.printf("  memRead    =%d\n", control.memRead);
+                System.out.printf("  memWrite   =%d\n", control.memWrite);
+                System.out.printf("  memToReg   =%d\n", control.memToReg);
+                System.out.printf("  regDst     =%d\n", control.regDst);
+                System.out.printf("  regWrite   =%d\n", control.regWrite);
+                System.out.printf("  branch     =%d\n", control.branch);
+                System.out.printf("  jump       =%d\n", control.jump);
+                System.out.println();
             }
         }
     }
