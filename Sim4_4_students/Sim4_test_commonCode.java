@@ -1,20 +1,20 @@
 public class Sim4_test_commonCode {
     // Register number macros
-    public static int S_REG(int x) { return x + 16; }
-    public static int T_REG(int x) { return (x < 8) ? (x + 8) : (x - 8 + 24); }
-    public static int A_REG(int x) { return x + 4; }
-    public static int V_REG(int x) { return x + 2; }
-    public static final int RA_REG = 31;
-    public static final int SP_REG = 29;
-    public static final int FP_REG = 30;
-    public static final int REG_ZERO = 0;
+    public int S_REG(int x) { return x + 16; }
+    public int T_REG(int x) { return (x < 8) ? (x + 8) : (x - 8 + 24); }
+    public int A_REG(int x) { return x + 4; }
+    public int V_REG(int x) { return x + 2; }
+    public final int RA_REG = 31;
+    public final int SP_REG = 29;
+    public final int FP_REG = 30;
+    public final int REG_ZERO = 0;
 
     // Instruction encoding macros
-    public static int R_FORMAT(int funct, int rs, int rt, int rd, int shamt) {
+    public int R_FORMAT(int funct, int rs, int rt, int rd, int shamt) {
         return R_FORMAT_X(0x00, funct, rs, rt, rd, shamt);
     }
 
-    public static int R_FORMAT_X(int opcode, int funct, int rs, int rt, int rd, int shamt) {
+    public int R_FORMAT_X(int opcode, int funct, int rs, int rt, int rd, int shamt) {
         return ((opcode & 0x3F) << 26) |
                 ((rs & 0x1F) << 21) |
                 ((rt & 0x1F) << 16) |
@@ -23,62 +23,62 @@ public class Sim4_test_commonCode {
                 ((funct & 0x3F) << 0);
     }
 
-    public static int I_FORMAT(int opcode, int rs, int rt, int imm16) {
+    public int I_FORMAT(int opcode, int rs, int rt, int imm16) {
         return ((opcode & 0x3F) << 26) |
                 ((rs & 0x1F) << 21) |
                 ((rt & 0x1F) << 16) |
                 (imm16 & 0xFFFF);
     }
 
-    public static int J_FORMAT(int opcode, int addr26) {
+    public int J_FORMAT(int opcode, int addr26) {
         return ((opcode & 0x3F) << 26) |
                 (addr26 & 0x3FFFFFF);
     }
 
     // Encoded instruction macros
-    public static final int NOP = 0;
+    public final int NOP = 0;
 
-    public static int ADD(int rd, int rs, int rt) { return R_FORMAT(32, rs, rt, rd, 0); }
-    public static int ADDU(int rd, int rs, int rt) { return R_FORMAT(33, rs, rt, rd, 0); }
-    public static int SUB(int rd, int rs, int rt) { return R_FORMAT(34, rs, rt, rd, 0); }
-    public static int SUBU(int rd, int rs, int rt) { return R_FORMAT(35, rs, rt, rd, 0); }
-    public static int ADDI(int rt, int rs, int imm16) { return I_FORMAT(8, rs, rt, imm16); }
-    public static int ADDIU(int rt, int rs, int imm16) { return I_FORMAT(9, rs, rt, imm16); }
+    public int ADD(int rd, int rs, int rt) { return R_FORMAT(32, rs, rt, rd, 0); }
+    public int ADDU(int rd, int rs, int rt) { return R_FORMAT(33, rs, rt, rd, 0); }
+    public int SUB(int rd, int rs, int rt) { return R_FORMAT(34, rs, rt, rd, 0); }
+    public int SUBU(int rd, int rs, int rt) { return R_FORMAT(35, rs, rt, rd, 0); }
+    public int ADDI(int rt, int rs, int imm16) { return I_FORMAT(8, rs, rt, imm16); }
+    public int ADDIU(int rt, int rs, int imm16) { return I_FORMAT(9, rs, rt, imm16); }
 
-    public static int MUL(int rd, int rs, int rt) { return R_FORMAT_X(0x1C, 2, rs, rt, rd, 0); }
-    public static int MULT(int rs, int rt) { return R_FORMAT(24, rs, rt, 0, 0); }
-    public static int MULTU(int rs, int rt) { return R_FORMAT(25, rs, rt, 0, 0); }
-    public static int DIV(int rs, int rt) { return R_FORMAT(26, rs, rt, 0, 0); }
-    public static int DIVU(int rs, int rt) { return R_FORMAT(27, rs, rt, 0, 0); }
+    public int MUL(int rd, int rs, int rt) { return R_FORMAT_X(0x1C, 2, rs, rt, rd, 0); }
+    public int MULT(int rs, int rt) { return R_FORMAT(24, rs, rt, 0, 0); }
+    public int MULTU(int rs, int rt) { return R_FORMAT(25, rs, rt, 0, 0); }
+    public int DIV(int rs, int rt) { return R_FORMAT(26, rs, rt, 0, 0); }
+    public int DIVU(int rs, int rt) { return R_FORMAT(27, rs, rt, 0, 0); }
 
-    public static int MFHI(int rd) { return R_FORMAT(16, 0, 0, rd, 0); }
-    public static int MFLO(int rd) { return R_FORMAT(18, 0, 0, rd, 0); }
+    public int MFHI(int rd) { return R_FORMAT(16, 0, 0, rd, 0); }
+    public int MFLO(int rd) { return R_FORMAT(18, 0, 0, rd, 0); }
 
-    public static int AND(int rd, int rs, int rt) { return R_FORMAT(36, rs, rt, rd, 0); }
-    public static int OR(int rd, int rs, int rt) { return R_FORMAT(37, rs, rt, rd, 0); }
-    public static int XOR(int rd, int rs, int rt) { return R_FORMAT(38, rs, rt, rd, 0); }
-    public static int NOR(int rd, int rs, int rt) { return R_FORMAT(39, rs, rt, rd, 0); }
-    public static int ANDI(int rt, int rs, int imm16) { return I_FORMAT(12, rs, rt, imm16); }
-    public static int ORI(int rt, int rs, int imm16) { return I_FORMAT(13, rs, rt, imm16); }
-    public static int XORI(int rt, int rs, int imm16) { return I_FORMAT(14, rs, rt, imm16); }
-    public static int LUI(int rt, int imm16) { return I_FORMAT(15, 0, rt, imm16); }
+    public int AND(int rd, int rs, int rt) { return R_FORMAT(36, rs, rt, rd, 0); }
+    public int OR(int rd, int rs, int rt) { return R_FORMAT(37, rs, rt, rd, 0); }
+    public int XOR(int rd, int rs, int rt) { return R_FORMAT(38, rs, rt, rd, 0); }
+    public int NOR(int rd, int rs, int rt) { return R_FORMAT(39, rs, rt, rd, 0); }
+    public int ANDI(int rt, int rs, int imm16) { return I_FORMAT(12, rs, rt, imm16); }
+    public int ORI(int rt, int rs, int imm16) { return I_FORMAT(13, rs, rt, imm16); }
+    public int XORI(int rt, int rs, int imm16) { return I_FORMAT(14, rs, rt, imm16); }
+    public int LUI(int rt, int imm16) { return I_FORMAT(15, 0, rt, imm16); }
 
-    public static int SLT(int rd, int rs, int rt) { return R_FORMAT(42, rs, rt, rd, 0); }
-    public static int SLTU(int rd, int rs, int rt) { return R_FORMAT(43, rs, rt, rd, 0); }
-    public static int SLTI(int rt, int rs, int imm16) { return I_FORMAT(10, rs, rt, imm16); }
-    public static int SLTIU(int rt, int rs, int imm16) { return I_FORMAT(11, rs, rt, imm16); }
+    public int SLT(int rd, int rs, int rt) { return R_FORMAT(42, rs, rt, rd, 0); }
+    public int SLTU(int rd, int rs, int rt) { return R_FORMAT(43, rs, rt, rd, 0); }
+    public int SLTI(int rt, int rs, int imm16) { return I_FORMAT(10, rs, rt, imm16); }
+    public int SLTIU(int rt, int rs, int imm16) { return I_FORMAT(11, rs, rt, imm16); }
 
-    public static int LW(int rt, int rs, int imm16) { return I_FORMAT(35, rs, rt, imm16); }
-    public static int SW(int rt, int rs, int imm16) { return I_FORMAT(43, rs, rt, imm16); }
-    public static int LB(int rt, int rs, int imm16) { return I_FORMAT(32, rs, rt, imm16); }
-    public static int SB(int rt, int rs, int imm16) { return I_FORMAT(40, rs, rt, imm16); }
+    public int LW(int rt, int rs, int imm16) { return I_FORMAT(35, rs, rt, imm16); }
+    public int SW(int rt, int rs, int imm16) { return I_FORMAT(43, rs, rt, imm16); }
+    public int LB(int rt, int rs, int imm16) { return I_FORMAT(32, rs, rt, imm16); }
+    public int SB(int rt, int rs, int imm16) { return I_FORMAT(40, rs, rt, imm16); }
 
-    public static int BEQ(int rs, int rt, int imm16) { return I_FORMAT(4, rs, rt, imm16); }
-    public static int BNE(int rs, int rt, int imm16) { return I_FORMAT(5, rs, rt, imm16); }
-    public static int J(int address) { return J_FORMAT(2, address); }
-    public static int JAL(int address) { return J_FORMAT(3, address); }
-    public static int JR(int rs) { return R_FORMAT(8, rs, 0, 0, 0); }
-    public static int SYSCALL() { return R_FORMAT(12, 0, 0, 0, 0); }
+    public int BEQ(int rs, int rt, int imm16) { return I_FORMAT(4, rs, rt, imm16); }
+    public int BNE(int rs, int rt, int imm16) { return I_FORMAT(5, rs, rt, imm16); }
+    public int J(int address) { return J_FORMAT(2, address); }
+    public int JAL(int address) { return J_FORMAT(3, address); }
+    public int JR(int rs) { return R_FORMAT(8, rs, 0, 0, 0); }
+    public int SYSCALL() { return R_FORMAT(12, 0, 0, 0, 0); }
 
 
     public void dumpPCInstruction(int pc, int inst) {
@@ -87,7 +87,7 @@ public class Sim4_test_commonCode {
                 (inst >> 16) & 0xFFFF, inst & 0xFFFF);
     }
 
-    public static void dumpFields(InstructionFields fields) {
+    public void dumpFields(InstructionFields fields) {
         System.out.println("  --");
         System.out.printf("  opcode  (6 bits)=0x%02x\n", fields.opcode);
         System.out.printf("  rs      (5 bits)=0x%02x\n", fields.rs);
@@ -102,7 +102,7 @@ public class Sim4_test_commonCode {
                 (fields.address >> 16) & 0xFFFF, fields.address & 0xFFFF);
     }
 
-    public static void dumpControl(int rsVal, int rtVal, CPUControl control) {
+    public void dumpControl(int rsVal, int rtVal, CPUControl control) {
         System.out.println("  --");
         System.out.printf("  rsVal=0x%04x_%04x\n", (rsVal >> 16) & 0xFFFF, rsVal & 0xFFFF);
         System.out.printf("  rtVal=0x%04x_%04x\n", (rtVal >> 16) & 0xFFFF, rtVal & 0xFFFF);
