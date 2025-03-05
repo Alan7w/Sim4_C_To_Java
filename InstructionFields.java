@@ -16,5 +16,5 @@ public class InstructionFields {
 	int shamt;  
 	int funct;
 	int imm16, imm32; 
-	int address;// this is the 26 bit field from the J format
+	int address; 	// this is the 26 bit field from the J format
 }
