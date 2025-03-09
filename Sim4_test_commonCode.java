@@ -198,7 +198,7 @@ public class Sim4_test_commonCode {
         // is this a system call?  For those, we simply skip over the student
         // implementation.
         if (inst == SYSCALL()) {
-            if (debug > 0) System.out.println("[systemCall]");
+            if (debug > 0) System.out.print("[systemCall]");
             pc[0] += 4;
             return execSyscall(regs, instMemory, dataMemory, pc, debug);
         }
