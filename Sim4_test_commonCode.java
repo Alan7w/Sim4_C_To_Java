@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Sim4_test_commonCode {
     /* these macros are useful for encoding instructions
      *
@@ -394,7 +396,8 @@ public class Sim4_test_commonCode {
         }
         // syscall 4: print_str
         else if (v0 == 4) {
-            System.out.printf("%s", new String(dataMemory, a0, dataMemory.length - a0));
+            // Extract string from memory starting at byte address a0
+            System.out.print(extractString(dataMemory, a0));
         }
         // unrecognized syscall
         else {
@@ -402,5 +405,32 @@ public class Sim4_test_commonCode {
         }
 
         return 0;
+    }
+
+    /**
+     * Helper method to extract a null-terminated string from memory.
+     * In MIPS memory, each word contains 4 bytes/characters.
+     */
+    private String extractString(int[] memory, int byteAddress) {
+        StringBuilder sb = new StringBuilder();
+        int wordIndex = byteAddress / 4;  // Convert byte address to word index
+        int byteOffset = byteAddress % 4; // Get offset within the word
+
+        while (wordIndex < memory.length) {
+            int word = memory[wordIndex++];
+
+            // Extract characters one by one, starting from byteOffset
+            for (int i = byteOffset; i < 4; i++) {
+                char c = (char)((word >> (i * 8)) & 0xFF);
+                if (c == '\0') {
+                    return sb.toString(); // Stop at null terminator
+                }
+                sb.append(c);
+            }
+
+            byteOffset = 0; // Reset offset after first word
+        }
+
+        return sb.toString();
     }
 }
