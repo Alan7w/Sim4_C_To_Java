@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class test_08_checkUpper4BitsOnJump {
     public static void main(String[] args) {
         Sim4 sim4 = new Sim4();
@@ -20,8 +18,9 @@ public class test_08_checkUpper4BitsOnJump {
             controls[i] = new CPUControl();
         }
 
-        // FIXED: Use the exact same values from the expected output
-        // Instead of relying on random generation
+        /* the PC and jump address are both chosen here.  We also
+         * choose what value of aluZero we'll deliver.
+         */
         oldPC[0] = 0x20ec303a;
         oldPC[1] = 0x575dcd05;
         oldPC[2] = 0x749d7dd9;
@@ -49,7 +48,9 @@ public class test_08_checkUpper4BitsOnJump {
             aluZero[i] = 0;
         }
 
-        // Fill in each of the control structs and make duplicates
+        /* fill in each of the control structs.  We make a duplicate of each
+         * one, which we'll use later to see if
+         */
         for (int i = 0; i < COUNT; i++) {
             sim4.extractInstructionFields(instructions[i], fields[i]);
 

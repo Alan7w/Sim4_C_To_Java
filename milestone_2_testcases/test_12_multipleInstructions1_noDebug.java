@@ -1,9 +1,6 @@
 public class test_12_multipleInstructions1_noDebug {
     public static void main(String[] args) {
-        // Create instances of Sim4 and Sim4_test_commonCode
-        Sim4 sim4 = new Sim4();
         Sim4_test_commonCode sim4_test_commonCode = new Sim4_test_commonCode();
-
         CPUMemory cpuState = new CPUMemory();
 
         // fill in the registers and data memory with some default values

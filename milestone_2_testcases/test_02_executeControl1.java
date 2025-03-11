@@ -10,7 +10,7 @@ public class test_02_executeControl1 {
         state.instMemory[512] = sim4_test_commonCode.ADDI(sim4_test_commonCode.T_REG(4), sim4_test_commonCode.T_REG(5), 16);
 
         for (state.pc = 0x0000; state.pc < 0x1000; state.pc += 4) {
-            // Save original state
+            /* save the original state, to see if the student changes it */
             CPUMemory stateOrig = new CPUMemory();
             System.arraycopy(state.instMemory, 0, stateOrig.instMemory, 0, state.instMemory.length);
             System.arraycopy(state.dataMemory, 0, stateOrig.dataMemory, 0, state.dataMemory.length);
@@ -46,6 +46,7 @@ public class test_02_executeControl1 {
                 System.out.println();
             }
 
+            /* was the state struct modified? */
             if (!java.util.Arrays.equals(state.instMemory, stateOrig.instMemory) ||
                     !java.util.Arrays.equals(state.dataMemory, stateOrig.dataMemory) ||
                     state.pc != stateOrig.pc ||

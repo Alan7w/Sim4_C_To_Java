@@ -143,7 +143,7 @@ public class test_06_execMEM {
                 System.out.println();
             }
 
-            /* was the state struct modified? */
+            /* was the state modified? */
             boolean fieldsModified = fields.opcode != fieldsSave.opcode ||
                     fields.rs != fieldsSave.rs ||
                     fields.rt != fieldsSave.rt ||

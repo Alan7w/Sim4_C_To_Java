@@ -1,7 +1,6 @@
 public class test_10_syscalls {
     public static void main(String[] args) {
         Sim4_test_commonCode sim4_test_commonCode = new Sim4_test_commonCode();
-
         CPUMemory cpuState = new CPUMemory();
 
         // fill in the registers and data memory with some default values

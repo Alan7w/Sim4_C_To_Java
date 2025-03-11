@@ -22,7 +22,7 @@ public class test_03_executeControl2 {
 
         // Iterate through possible PC values
         for (state.pc = 0x0000; state.pc < 0x1000; state.pc += 4) {
-            // Save the original state to detect modifications
+            /* save the original state, to see if the student changes it */
             CPUMemory stateOrig = new CPUMemory();
             System.arraycopy(state.instMemory, 0, stateOrig.instMemory, 0, state.instMemory.length);
             System.arraycopy(state.dataMemory, 0, stateOrig.dataMemory, 0, state.dataMemory.length);

@@ -121,7 +121,7 @@ public class test_05_execALU {
                 System.out.println();
             }
 
-            /* was the state struct modified? */
+            /* was the state modified? */
             boolean fieldsModified = fields.opcode != fieldsSave.opcode ||
                     fields.rs != fieldsSave.rs ||
                     fields.rt != fieldsSave.rt ||

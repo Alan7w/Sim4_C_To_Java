@@ -84,7 +84,7 @@ public class test_04_aluInputs {
                 System.out.println();
             }
 
-            /* was the state struct modified? */
+            /* was the state modified? */
             if (!java.util.Arrays.equals(state.instMemory, stateOrig.instMemory) ||
                     !java.util.Arrays.equals(state.dataMemory, stateOrig.dataMemory) ||
                     state.pc != stateOrig.pc ||

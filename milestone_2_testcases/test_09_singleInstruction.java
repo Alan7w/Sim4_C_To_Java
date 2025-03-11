@@ -1,9 +1,6 @@
 public class test_09_singleInstruction {
     public static void main(String[] args) {
-        // Create instances of Sim4 and Sim4_test_commonCode
-        Sim4 sim4 = new Sim4();
         Sim4_test_commonCode sim4_test_commonCode = new Sim4_test_commonCode();
-
         CPUMemory cpuState = new CPUMemory();
 
         cpuState.instMemory[0x40] = sim4_test_commonCode.ADD(sim4_test_commonCode.T_REG(0), sim4_test_commonCode.S_REG(3), sim4_test_commonCode.S_REG(4));
